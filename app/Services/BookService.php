@@ -2,20 +2,20 @@
 
 namespace App\Services;
 
-use App\Models\Livro;
+use App\Models\Book;
 
-class LivroService
+class BookService
 {
     public function create($request)
     {
-        $livro = Livro::create($request->all());
+        $livro = Book::create($request->all());
 
         return $livro;
     }
 
     public function update($request, $id)
     {
-        $livro = Livro::findOrFail($id);
+        $livro = Book::findOrFail($id);
 
         $livro->update($request->all());
 
@@ -24,7 +24,7 @@ class LivroService
 
     public function destroy($id)
     {
-        $livro = Livro::findOrFail($id);
+        $livro = Book::findOrFail($id);
 
         $livro->delete();
 

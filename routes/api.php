@@ -4,9 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Rota Leitores
-Route::resource('/leitores', \App\Http\Controllers\Api\LeitorController::class);
-Route::post('/adicionar-livro-lido',
-[\App\Http\Controllers\Api\LeitorController::class, 'storeReadBook'])->name('leitor.storeReadBook');
+Route::resource('/readers', \App\Http\Controllers\Api\ReaderController::class);
+Route::post('/store-read-book',
+[\App\Http\Controllers\Api\ReaderController::class, 'storeReadBook'])->name('leitor.storeReadBook');
 
 // Rota Livros
-Route::resource('/livros', \App\Http\Controllers\Api\LivroController::class);
+Route::resource('/books', \App\Http\Controllers\Api\BookController::class);

@@ -3,52 +3,52 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Leitor;
-use App\Services\LeitorService;
+use App\Models\Reader;
+use App\Services\ReaderService;
 use Illuminate\Http\Request;
 
-class LeitorController extends Controller
+class ReaderController extends Controller
 {
-    private $leitorService;
+    private $readerService;
 
     public function __construct()
     {
-        $this->leitorService = new LeitorService;
+        $this->readerService = new ReaderService;
     }
 
     public function index()
     {
-        $leitores = Leitor::all()->toArray();
+        $leitores = Reader::with('books')->get();
 
         return response()->json([
-            'leitores' => $leitores,
+            'readers' => $leitores,
         ]);
     }
 
     public function store(Request $request)
     {
-        $leitor = $this->leitorService->create($request);
+        $reader = $this->readerService->create($request);
 
         return response()->json([
-            'sucesso' => $leitor,
+            'success' => $reader,
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $leitor = $this->leitorService->update($request, $id);
+        $this->readerService->update($request, $id);
 
         return response()->json([
-            'sucesso' => 'Registro atualizado com sucesso.',
+            'success' => 'Data updated successfully.',
         ]);
     }
 
     public function destroy($id)
     {
-        $leitor = $this->leitorService->destroy($id);
+        $this->readerService->destroy($id);
 
         return response()->json([
-            'sucesso' => 'Registro excluído com sucesso.',
+            'success' => 'Data deleted successfully.',
         ]);
     }
 
