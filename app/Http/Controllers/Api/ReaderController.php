@@ -52,8 +52,12 @@ class ReaderController extends Controller
         ]);
     }
 
-    public function storeReadBook(Request $request)
+    public function storeReadBook(Request $request, $id)
     {
-        //
+        $this->readerService->storeReadBook($request, $id);
+
+        return response()->json([
+            'success' => 'Book read by reader.',
+        ]);
     }
 }

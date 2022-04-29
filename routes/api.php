@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Rota Leitores
 Route::resource('/readers', \App\Http\Controllers\Api\ReaderController::class);
-Route::post('/store-read-book',
+Route::post('/store-read-book/{id}',
 [\App\Http\Controllers\Api\ReaderController::class, 'storeReadBook'])->name('leitor.storeReadBook');
 
 // Rota Livros
