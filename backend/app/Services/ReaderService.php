@@ -9,27 +9,21 @@ class ReaderService
 {
     public function create($request)
     {
-        $reader = Reader::create($request->all());
-
-        return $reader;
+        return Reader::create($request->all());
     }
 
     public function update($request, $id)
     {
         $reader = Reader::findOrFail($id);
 
-        $reader->update($request->all());
-
-        return $reader;
+        return $reader->update($request->all());
     }
 
     public function destroy($id)
     {
         $reader = Reader::findOrFail($id);
 
-        $reader->delete();
-
-        return $reader;
+        return $reader->delete();
     }
 
     public function storeReadBook($request, $id)
@@ -37,8 +31,6 @@ class ReaderService
         $reader = Reader::findOrFail($id);
         $book = Book::findOrFail($request->get('book_id'))->toArray();
 
-        $reader->books()->create($book);
-
-        return $reader;
+        return $reader->books()->create($book);
     }
 }

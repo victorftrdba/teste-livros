@@ -18,10 +18,10 @@ class ReaderController extends Controller
 
     public function index()
     {
-        $leitores = Reader::with('books')->get();
+        $readers = Reader::with('books')->get();
 
         return response()->json([
-            'readers' => $leitores,
+            'readers' => $readers,
         ]);
     }
 

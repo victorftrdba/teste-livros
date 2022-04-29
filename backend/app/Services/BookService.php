@@ -8,26 +8,20 @@ class BookService
 {
     public function create($request)
     {
-        $livro = Book::create($request->all());
-
-        return $livro;
+        return Book::create($request->all());
     }
 
     public function update($request, $id)
     {
-        $livro = Book::findOrFail($id);
+        $book = Book::findOrFail($id);
 
-        $livro->update($request->all());
-
-        return $livro;
+        return $book->update($request->all());
     }
 
     public function destroy($id)
     {
-        $livro = Book::findOrFail($id);
+        $book = Book::findOrFail($id);
 
-        $livro->delete();
-
-        return $livro;
+        return $book->delete();
     }
 }
