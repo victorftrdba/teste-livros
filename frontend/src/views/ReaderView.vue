@@ -1,8 +1,5 @@
-<script setup>
-import Readers from '@/components/Readers.vue'
-</script>
-
 <template>
+  <RouterLink to="/new-reader">Novo Leitor</RouterLink>
   <Readers />
 </template>
 
