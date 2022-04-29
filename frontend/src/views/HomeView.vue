@@ -1,9 +1,5 @@
-<script setup>
-import TheWelcome from '@/components/TheWelcome.vue'
-</script>
-
 <template>
   <main>
-    <TheWelcome />
+    Bem-vindo ao Sistema de Gestão de Leitores
   </main>
 </template>
