@@ -29,3 +29,12 @@
 ```
 - Como estou utilizando Redis é necessário estar com o mesmo instalado, se estiver usando Windows verificar como instalar Redis no WSL e digite o comando <strong>sudo service redis-server start</strong>
 - Documentação: <a target="_blank" href="https://redis.io/docs/getting-started/installation/install-redis-on-windows/">Install Redis</a>
+
+## Logando no Sistema
+- O front-end foi desenvolvido utilizando a biblioteca VueJS 3;
+- Para realizar o login no painel administrativo e conseguir gerar usuários leitores, é necessário rodar o comando <strong>php artisan db:seed --class=UserSeeder</strong>;
+- Credenciais do administrador:
+```sh
+    'email' => 'admin@teste.com'
+    'password' => 'teste'
+```

@@ -1,28 +1,21 @@
-# frontend
+## Informações importantes
+- Todas as rotas estão protegidas, com exceção das rotas de login;
+- Para conseguir acessar o painel do leitor/administrador é necessário logar com os usuários com as funções respectivas;
+- Todas as requisições são feitas utilizando a biblioteca Axios e rotas que são protegidas é necessário passar o token no header;
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Instalando projeto
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Rodando em ambiente de desenvolvimento
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Rodando em ambiente de produção
 
 ```sh
 npm run build
