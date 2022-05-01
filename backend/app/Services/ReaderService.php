@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Redis;
 
 class ReaderService
 {
+    /**
+     * @param $request
+     * @return void
+     */
     public function authenticate($request)
     {
         $request->validate([
@@ -23,6 +27,10 @@ class ReaderService
         }
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function create($request)
     {
         $request->validate([
@@ -46,6 +54,11 @@ class ReaderService
         return Reader::create($data);
     }
 
+    /**
+     * @param $request
+     * @param $id
+     * @return mixed
+     */
     public function update($request, $id)
     {
         $request->validate([
@@ -71,6 +84,10 @@ class ReaderService
         return $reader->update($data);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
         $reader = Reader::findOrFail($id);
@@ -78,6 +95,11 @@ class ReaderService
         return $reader->delete();
     }
 
+    /**
+     * @param $request
+     * @param $id
+     * @return string
+     */
     public function storeReadBook($request, $id)
     {
         $request->validate([

@@ -7,58 +7,26 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Rodando o projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Rode o comando <strong>composer install</strong>;
+- Utilizar porta 8000;
+- Gerar chave com <strong>php artisan key:generate</strong>;
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Informações importantes
+- Configurar no .env as credenciais do mailtrap para testar o envio de e-mails;
+- <a href="https://mailtrap.io/signin">MAILTRAP</a>;
+- Para verificar as CRONs configuradas, rode o comando <strong>php artisan schedule:list</strong>
+- O comando para testar o disparo de e-mails para os leitores em aniversário é: <strong>php artisan happy:birthday</strong>
+- Caso não tenha as configurações do banco de dados NoSQL MongoDB no arquivo /config/database.php, poderá utilizar as seguintes credenciais (inserir ou alterar na chave 'connections')':
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+'mongodb' => [
 
-## Learning Laravel
+      'driver' => 'mongodb',
+      'dsn' => env('DB_URI',
+      'mongodb+srv://localhost:dev102030@cluster0.mdupn.mongodb.net/myappdb?retryWrites=true&w=majority'),
+      'database' => 'livros',
+  ],
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Como estou utilizando Redis é necessário estar com o mesmo instalado, se estiver usando Windows verificar como instalar Redis no WSL e digite o comando <strong>sudo service redis-server start</strong>
+- Documentação: <a href="https://redis.io/docs/getting-started/installation/install-redis-on-windows/">Install Redis</a>

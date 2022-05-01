@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminService
 {
+    /**
+     * @param $request
+     * @return void
+     */
     public function authenticate($request)
     {
         $request->validate([

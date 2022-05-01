@@ -10,13 +10,23 @@ use Illuminate\Support\Facades\Redis;
 
 class ReaderController extends Controller
 {
+    /**
+     * @var ReaderService
+     */
     private $readerService;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->readerService = new ReaderService;
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function authenticate(Request $request)
     {
         $token = $this->readerService->authenticate($request);
@@ -24,6 +34,9 @@ class ReaderController extends Controller
         return response()->json($token);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         $readers = Reader::orderBy('created_at', 'DESC')->with('books')->get();
@@ -33,6 +46,10 @@ class ReaderController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $reader = $this->readerService->create($request);
@@ -42,6 +59,11 @@ class ReaderController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request, $id)
     {
         $this->readerService->update($request, $id);
@@ -51,6 +73,10 @@ class ReaderController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($id)
     {
         $this->readerService->destroy($id);
@@ -60,6 +86,11 @@ class ReaderController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function storeReadBook(Request $request, $id)
     {
         $response = $this->readerService->storeReadBook($request, $id);
@@ -69,6 +100,11 @@ class ReaderController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function seeReaderBooks(Request $request, $id)
     {
         return response()->json([

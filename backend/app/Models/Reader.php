@@ -12,8 +12,17 @@ class Reader extends Eloquent implements Authenticatable
 {
     use HasApiTokens, AuthenticatableTrait;
 
+    /**
+     * @var string
+     */
     protected $connection = 'mongodb';
+    /**
+     * @var string
+     */
     protected $collection = 'readers';
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'email',
@@ -23,6 +32,9 @@ class Reader extends Eloquent implements Authenticatable
         'password',
     ];
 
+    /**
+     * @return \Jenssegers\Mongodb\Relations\EmbedsMany
+     */
     public function books()
     {
         return $this->embedsMany(Book::class);

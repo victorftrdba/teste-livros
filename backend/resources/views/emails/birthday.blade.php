@@ -21,7 +21,17 @@
     }
 </style>
     @php
-        $books = json_decode(\Illuminate\Support\Facades\Redis::get('reader_books_'.$reader['_id']));
+        $books = [];
+
+        $booksArray = json_decode(\Illuminate\Support\Facades\Redis::get('reader_books_'.$reader['_id']));
+
+        $year = date('Y');
+
+        foreach ($booksArray as $bookArray) {
+            if(\Carbon\Carbon::parse($bookArray->created_at)->format('Y') == $year) {
+                $books[] = $bookArray;
+            };
+        };
     @endphp
     <div>
         A equipe deseja um feliz aniversário para você, {{$reader['name']}}.

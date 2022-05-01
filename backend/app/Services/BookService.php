@@ -6,6 +6,10 @@ use App\Models\Book;
 
 class BookService
 {
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function create($request)
     {
         $data = [
@@ -27,6 +31,11 @@ class BookService
         return Book::create($data);
     }
 
+    /**
+     * @param $request
+     * @param $id
+     * @return mixed
+     */
     public function update($request, $id)
     {
         $book = Book::findOrFail($id);
@@ -34,6 +43,10 @@ class BookService
         return $book->update($request->all());
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
         $book = Book::findOrFail($id);

@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->resource('/readers', \App\Http\Controllers\Ap
 Route::middleware('auth:sanctum')->post('/store-read-book/{id}',
 [\App\Http\Controllers\Api\ReaderController::class, 'storeReadBook'])->name('leitor.storeReadBook');
 
-// Resgatar livros do leitor pelo Redis
+// Resgatar livros lidos pelo leitor pelo Redis
 Route::middleware('auth:sanctum')
     ->get('/readers/see-reader-books/{id}', [\App\Http\Controllers\Api\ReaderController::class, 'seeReaderBooks']);
 

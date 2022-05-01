@@ -7,7 +7,13 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 class PersonalAccessToken extends Model implements HasAbilities
 {
+    /**
+     * @var string
+     */
     protected $connection = 'mongodb';
+    /**
+     * @var string
+     */
     protected $collection = 'personal_access_tokens';
     /**
      * The attributes that should be cast to native types.

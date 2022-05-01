@@ -9,13 +9,22 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    /**
+     * @var BookService
+     */
     private $bookService;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->bookService = new BookService;
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         $books = Book::orderBy('created_at', 'DESC')->get();
@@ -25,6 +34,10 @@ class BookController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $book = $this->bookService->create($request);
@@ -34,6 +47,11 @@ class BookController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request, $id)
     {
         $this->bookService->update($request, $id);
@@ -43,6 +61,10 @@ class BookController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($id)
     {
         $this->bookService->destroy($id);
