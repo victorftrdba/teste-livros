@@ -13,7 +13,7 @@
               <RouterLink class="me-3" to="/admin/readers">Leitores</RouterLink>
             </div>
             <div class="col-6 d-flex justify-content-end">
-              <button @click="logout()" class="btn btn-danger rounded-0">Logout</button>
+              <button @click="logout()" class="btn-danger">Logout</button>
             </div>
           </div>
         </div>
@@ -28,6 +28,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem('admin-token');
+      localStorage.removeItem('admin');
 
       this.$router.push({name:'admin-login'});
     }

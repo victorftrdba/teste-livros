@@ -2,12 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <form @submit.prevent="storeBook()">
+        <form @submit.prevent="updateBook()">
           <div v-for="error in errors">
             {{error}}
           </div>
           <div class="mt-3 fw-bold text-uppercase">
-            Informações do Livro
+            Editar Livro
           </div>
           <div class="border border-2 rounded p-4">
             <div class="row mb-3">
@@ -82,14 +82,14 @@
 
 <script>
 import axios from "axios";
-import {mask} from 'vue-the-mask'
+import {mask} from "vue-the-mask";
 
 export default {
   directives: {mask},
-  name: "NewBook.vue",
   data() {
     return {
       errors: [],
+      id: "",
       name: "",
       gender: "",
       author: "",
@@ -105,8 +105,24 @@ export default {
       isbn: "",
     }
   },
+  mounted() {
+    const book = JSON.parse(this.$route.params.book);
+
+    this.id = book._id;
+    this.name = book.name;
+    this.gender = book.gender;
+    this.author = book.author;
+    this.pages = book.pages;
+    this.year = book.year;
+    this.language = book.language;
+    this.edition = book.edition;
+    this.editor.name = book.editor.name;
+    this.editor.code = book.editor.code;
+    this.editor.phone = book.editor.phone;
+    this.isbn = book.isbn;
+  },
   methods: {
-    async storeBook()
+    async updateBook()
     {
       this.errors = [];
 
@@ -176,7 +192,7 @@ export default {
         return false;
       }
 
-      const response = await axios.post('http://localhost:8000/api/books', data, {
+      const response = await axios.patch(`http://localhost:8000/api/books/${this.id}`, data, {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem('admin-token')}`
         }

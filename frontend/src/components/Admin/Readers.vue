@@ -6,8 +6,8 @@ import moment from 'moment'
   <div class="container">
     <div class="row">
       <div class="col">
-        <RouterLink to="/admin/new-reader">Novo Leitor</RouterLink>
-        <table class="table table-bordered text-center mt-3">
+        <RouterLink class="btn-primary p-2" to="/admin/new-reader">Novo Leitor</RouterLink>
+        <table class="table table-bordered text-center mt-3 table-responsive">
           <thead>
           <tr>
             <th>Nome</th>
@@ -15,6 +15,7 @@ import moment from 'moment'
             <th>Telefone</th>
             <th>Endereço</th>
             <th>Aniversário</th>
+            <th>Ações</th>
           </tr>
           </thead>
           <tbody>
@@ -33,6 +34,17 @@ import moment from 'moment'
             </td>
             <td>
               {{moment(reader.birthday).format('DD/MM')}}
+            </td>
+            <td>
+              <button @click="showReadBooks(reader.name, reader.books)" class="btn-primary">
+                Ver livros lidos
+              </button>
+              <button @click="updateReader(reader)" class="btn-success ms-3">
+                Editar leitor
+              </button>
+              <button @click="deleteReader(reader._id)" class="btn-danger ms-3">
+                Excluir leitor
+              </button>
             </td>
           </tr>
           </tbody>
@@ -53,9 +65,26 @@ export default {
     }
   },
   async created() {
-    const response = await axios.get('http://localhost:8000/api/readers');
+    const response = await axios.get('http://localhost:8000/api/readers', {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('admin-token')}`
+      }
+    });
 
     return this.readers = response.data.readers;
   },
+  methods: {
+    showReadBooks(name, books) {
+      this.$router.push({name: 'reader-book', params: {
+          name,
+          books: JSON.stringify(books)
+        }});
+    },
+    updateReader(reader) {
+      this.$router.push({name: 'update-reader', params: {
+          reader: JSON.stringify(reader),
+        }});
+    }
+  }
 }
 </script>

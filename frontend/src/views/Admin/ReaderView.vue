@@ -1,7 +1,7 @@
 <script setup>
   import Readers from "../../components/Admin/Readers.vue";
   import NavBar from "../../components/Admin/NavBar.vue";
-  import Auth from "./Auth.vue";
+  import Auth from "../../components/Admin/Auth.vue";
 </script>
 
 <template>

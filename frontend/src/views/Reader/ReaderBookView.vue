@@ -1,7 +1,10 @@
 <script setup>
 import Book from "../../components/Reader/Book.vue";
+import Auth from "../../components/Reader/Auth.vue";
 </script>
 
 <template>
-  <Book />
+  <Auth>
+    <Book />
+  </Auth>
 </template>

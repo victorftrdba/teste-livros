@@ -2,12 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <form @submit.prevent="storeReader()">
+        <form @submit.prevent="updateReader()">
           <div v-for="error in errors">
             {{error}}
           </div>
           <div class="mt-3 fw-bold text-uppercase">
-            Informações do Leitor
+            Editar Leitor
           </div>
           <div class="border border-2 rounded p-4 mb-3">
             <div class="row mb-3">
@@ -55,10 +55,11 @@ import {mask} from 'vue-the-mask';
 
 export default {
   directives: {mask},
-  name: "NewReader.vue",
+  name: "UpdateReader",
   data() {
     return {
       errors: [],
+      id: "",
       name: "",
       email: "",
       phone: "",
@@ -67,8 +68,18 @@ export default {
       password: "",
     }
   },
+  mounted() {
+    const reader = JSON.parse(this.$route.params.reader);
+
+    this.id = reader._id;
+    this.name = reader.name;
+    this.email = reader.email;
+    this.phone = reader.phone;
+    this.address = reader.address;
+    this.birthday = reader.birthday;
+  },
   methods: {
-    async storeReader() {
+    async updateReader() {
       this.errors = [];
 
       const data = {
@@ -110,7 +121,7 @@ export default {
         return false;
       }
 
-      const response = await axios.post('http://localhost:8000/api/readers', data, {
+      const response = await axios.patch(`http://localhost:8000/api/readers/${this.id}`, data, {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem('admin-token')}`
         }

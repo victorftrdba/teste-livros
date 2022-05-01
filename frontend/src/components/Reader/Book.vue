@@ -5,7 +5,12 @@
         <div class="mb-3 fw-bold text-uppercase">
           Lista de livros cadastrados
         </div>
-        <table class="table table-bordered text-center">
+        <div>
+          <button @click="logout()" class="btn-danger mb-3">
+            Logout
+          </button>
+        </div>
+        <table class="table table-bordered text-center table-responsive">
           <thead>
             <tr>
               <th>Nome</th>
@@ -58,7 +63,7 @@
               {{book.isbn}}
             </td>
             <td>
-              <button @click="readBook(book._id)" class="btn btn-white rounded-0" title="Livro lido">
+              <button @click="readBook(book._id)" class="btn btn-white rounded-0" title="Marcar como lido">
                 <i class="fa-solid fa-square-check"></i>
               </button>
             </td>
@@ -91,9 +96,19 @@
           book_id
         };
 
-        const response = await axios.post(`http://localhost:8000/api/store-read-book/${user._id}`, data);
+        const response = await axios.post(`http://localhost:8000/api/store-read-book/${user._id}`, data, {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('reader-token')}`
+          }
+        });
 
         return alert("Livro registrado como lido com sucesso!");
+      },
+      logout() {
+        localStorage.removeItem('reader-token');
+        localStorage.removeItem('user');
+
+        this.$router.push({name: 'reader-login'});
       }
     }
   }

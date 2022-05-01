@@ -1,9 +1,16 @@
+<script setup>
+import NavBar from "./NavBar.vue";
+</script>
+
 <template>
+  <NavBar />
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <RouterLink class="btn-primary p-2" to="/admin/new-book">Novo Livro</RouterLink>
-        <table class="table table-bordered text-center mt-3 table-responsive">
+      <div class="col-12 mt-4">
+        <div class="text-uppercase fw-bold mb-3">
+          Livros lidos pelo leitor {{this.name}}: <span class="text-danger">{{this.books.length}}</span>
+        </div>
+        <table class="table table-bordered text-center table-responsive">
           <thead>
           <tr>
             <th>Nome</th>
@@ -17,7 +24,6 @@
             <th>Código da Editora</th>
             <th>Telefone da Editora</th>
             <th>ISBN</th>
-            <th>Ações</th>
           </tr>
           </thead>
           <tbody>
@@ -55,11 +61,6 @@
             <td>
               {{book.isbn}}
             </td>
-            <td>
-              <button @click="updateBook(book)" class="btn-success ms-3">
-                Editar livro
-              </button>
-            </td>
           </tr>
           </tbody>
         </table>
@@ -69,29 +70,17 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-  name: "Books.vue",
+  name: "ReaderBooks",
   data() {
     return {
-      books: {}
+      name: "",
+      books: {},
     }
   },
-  async created() {
-    const response = await axios.get('http://localhost:8000/api/books', {
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem('admin-token')}`
-      }
-    });
-    return this.books = response.data.books;
-  },
-  methods: {
-    updateBook(book) {
-      this.$router.push({name: 'update-book', params: {
-          book: JSON.stringify(book),
-        }});
-    }
+  created() {
+    this.name = this.$route.params.name;
+    this.books = JSON.parse(this.$route.params.books);
   }
 }
 </script>
