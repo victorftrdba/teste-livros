@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Eloquent implements Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, AuthenticatableTrait;
+
+    protected $connection = 'mongodb';
+    protected $collection = 'users';
 
     /**
      * The attributes that are mass assignable.

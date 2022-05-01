@@ -8,7 +8,23 @@ class BookService
 {
     public function create($request)
     {
-        return Book::create($request->all());
+        $data = [
+            'name' => $request->get('name'),
+            'gender' => $request->get('gender'),
+            'author' => $request->get('author'),
+            'pages' => $request->get('pages'),
+            'year' => $request->get('year'),
+            'language' => $request->get('language'),
+            'edition' => $request->get('edition'),
+            'editor' => [
+                'name' => $request->get('editor')['name'],
+                'code' => $request->get('editor')['code'],
+                'phone' => $request->get('editor')['phone'],
+            ],
+            'isbn' => $request->get('isbn'),
+        ];
+
+        return Book::create($data);
     }
 
     public function update($request, $id)

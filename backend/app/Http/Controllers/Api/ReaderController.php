@@ -16,6 +16,13 @@ class ReaderController extends Controller
         $this->readerService = new ReaderService;
     }
 
+    public function authenticate(Request $request)
+    {
+        $token = $this->readerService->authenticate($request);
+
+        return response()->json($token);
+    }
+
     public function index()
     {
         $readers = Reader::with('books')->get();

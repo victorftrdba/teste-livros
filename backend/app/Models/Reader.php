@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Reader extends Model
+class Reader extends Eloquent implements Authenticatable
 {
+    use HasApiTokens, AuthenticatableTrait;
+
     protected $connection = 'mongodb';
     protected $collection = 'readers';
     protected $fillable = [
@@ -14,6 +20,7 @@ class Reader extends Model
         'phone',
         'address',
         'birthday',
+        'password',
     ];
 
     public function books()
