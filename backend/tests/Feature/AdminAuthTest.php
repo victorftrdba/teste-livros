@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,8 +15,10 @@ class AdminAuthTest extends TestCase
      */
     public function test_admin_auth_returns_ok()
     {
+        $user = User::factory()->create();
+
         $response = $this->post('/api/admin-login', [
-            'email' => 'admin@teste.com',
+            'email' => $user['email'],
             'password' => 'teste'
         ]);
 
