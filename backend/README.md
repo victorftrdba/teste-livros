@@ -39,7 +39,7 @@
     'password' => 'teste'
 ```
 - Credenciais de leitor:
-- ```sh
+```sh
     'email' => 'teste@teste.com'
     'password' => 'teste'
 ```
