@@ -43,3 +43,6 @@
     'email' => 'teste@teste.com'
     'password' => 'teste'
 ```
+
+## Testes
+- Para rodar os testes, utilize o comando <strong>./vendor/bin/phpunit</strong>
