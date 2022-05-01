@@ -19,14 +19,13 @@
 - Para verificar as CRONs configuradas, rode o comando <strong>php artisan schedule:list</strong>
 - O comando para testar o disparo de e-mails para os leitores em aniversário é: <strong>php artisan happy:birthday</strong>
 - Caso não tenha as configurações do banco de dados NoSQL MongoDB no arquivo /config/database.php, poderá utilizar as seguintes credenciais (inserir ou alterar na chave 'connections')':
-
+```sh
 'mongodb' => [
-
       'driver' => 'mongodb',
       'dsn' => env('DB_URI',
       'mongodb+srv://localhost:dev102030@cluster0.mdupn.mongodb.net/myappdb?retryWrites=true&w=majority'),
       'database' => 'livros',
   ],
-
+```
 - Como estou utilizando Redis é necessário estar com o mesmo instalado, se estiver usando Windows verificar como instalar Redis no WSL e digite o comando <strong>sudo service redis-server start</strong>
 - Documentação: <a target="_blank" href="https://redis.io/docs/getting-started/installation/install-redis-on-windows/">Install Redis</a>
