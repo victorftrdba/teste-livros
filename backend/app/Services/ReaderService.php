@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Book;
 use App\Models\Reader;
 use Hash;
+use Illuminate\Support\Facades\Redis;
 
 class ReaderService
 {
@@ -12,7 +13,7 @@ class ReaderService
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|password'
+            'password' => 'required|string'
         ]);
 
         $reader = Reader::where('email', $request->email)->first();
@@ -80,12 +81,22 @@ class ReaderService
     public function storeReadBook($request, $id)
     {
         $request->validate([
-            'book_id' => 'required|numeric',
+            'book_id' => 'required',
         ]);
 
         $reader = Reader::findOrFail($id);
         $book = Book::findOrFail($request->book_id)->toArray();
 
-        return $reader->books()->create($book);
+        foreach ($reader->books as $reader_book) {
+            if ($reader_book->name == $book['name']) {
+                return "Livro já foi marcado como lido pelo usuário!";
+            }
+        }
+
+        $reader->books()->create($book);
+
+        Redis::set('reader_books_'.$reader->_id, json_encode($reader->books));
+
+        return "Livro marcado como lido com sucesso!";
     }
 }

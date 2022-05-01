@@ -32,6 +32,10 @@ class HappyBirthday extends Mailable
     public function build()
     {
         return $this->from('victornogu80@gmail.com', 'Victor Nogueira')
-            ->view('emails.birthday');
+            ->subject("Feliz Aniversário, ".$this->reader['name'])
+            ->view('emails.birthday')
+            ->with([
+                'reader' => $this->reader,
+            ]);
     }
 }

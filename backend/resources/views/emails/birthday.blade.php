@@ -8,21 +8,36 @@
     <title>Feliz Aniversário!</title>
 </head>
 <body>
+<style>
+    body {
+        font-family: fantasy;
+        line-height: 120%;
+        text-align: center;
+    }
+
+    .total {
+        font-weight: bold;
+        color: red;
+    }
+</style>
+    @php
+        $books = json_decode(\Illuminate\Support\Facades\Redis::get('reader_books_'.$reader['_id']));
+    @endphp
     <div>
-        A equipe deseja um feliz aniversário para você! {{$reader->name}}
+        A equipe deseja um feliz aniversário para você, {{$reader['name']}}.
     </div>
     <div>
-        Você leu um total de {{count($reader->books)}} livros neste ano, que impressionante!
+        Você leu um total de <span class="total">{{count($books)}}</span> livros neste ano, que impressionante!
 
         @php
             $pages = 0;
 
-            foreach ($reader->books as $book) {
+            foreach ($books as $book) {
                 $pages += $book->pages;
             }
         @endphp
 
-        Total de páginas lidas: {{$pages}}.
+        Total de páginas lidas: <span class="total">{{$pages}}</span>.
     </div>
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Reader;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class HappyBirthday extends Command
 {
@@ -36,8 +37,9 @@ class HappyBirthday extends Command
         foreach ($readers as $reader) {
             $birthday = Carbon::parse($reader['birthday'])->format('d/m');
 
-            if ($birthday == $now) {
-                new \App\Mail\HappyBirthday($reader);
+            if ($birthday == $now && isset($reader['books'])) {
+                Mail::to($reader['email'])
+                    ->queue(new \App\Mail\HappyBirthday($reader));
             }
         }
     }

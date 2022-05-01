@@ -85,7 +85,11 @@
       }
     },
     async created() {
-      const response = await axios.get('http://localhost:8000/api/books');
+      const response = await axios.get('http://localhost:8000/api/books', {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('reader-token')}`
+        }
+      });
       return this.books = response.data.books;
     },
     methods: {
@@ -102,7 +106,7 @@
           }
         });
 
-        return alert("Livro registrado como lido com sucesso!");
+        return alert(response.data.success);
       },
       logout() {
         localStorage.removeItem('reader-token');

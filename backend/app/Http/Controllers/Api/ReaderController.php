@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Reader;
 use App\Services\ReaderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ReaderController extends Controller
 {
@@ -25,7 +26,7 @@ class ReaderController extends Controller
 
     public function index()
     {
-        $readers = Reader::with('books')->get();
+        $readers = Reader::orderBy('created_at', 'DESC')->with('books')->get();
 
         return response()->json([
             'readers' => $readers,
@@ -61,10 +62,17 @@ class ReaderController extends Controller
 
     public function storeReadBook(Request $request, $id)
     {
-        $this->readerService->storeReadBook($request, $id);
+        $response = $this->readerService->storeReadBook($request, $id);
 
         return response()->json([
-            'success' => 'Book read by reader.',
+            'success' => $response,
+        ]);
+    }
+
+    public function seeReaderBooks(Request $request, $id)
+    {
+        return response()->json([
+            'books' => json_decode(Redis::get('reader_books_'.$id)),
         ]);
     }
 }

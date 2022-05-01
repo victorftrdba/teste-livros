@@ -18,7 +18,7 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = Book::all()->toArray();
+        $books = Book::orderBy('created_at', 'DESC')->get();
 
         return response()->json([
             'books' => $books,

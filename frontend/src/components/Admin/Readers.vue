@@ -36,7 +36,7 @@ import moment from 'moment'
               {{moment(reader.birthday).format('DD/MM')}}
             </td>
             <td>
-              <button @click="showReadBooks(reader.name, reader.books)" class="btn-primary">
+              <button @click="showReadBooks(reader._id, reader.name)" class="btn-primary">
                 Ver livros lidos
               </button>
               <button @click="updateReader(reader)" class="btn-success ms-3">
@@ -74,10 +74,10 @@ export default {
     return this.readers = response.data.readers;
   },
   methods: {
-    showReadBooks(name, books) {
+    showReadBooks(id, name) {
       this.$router.push({name: 'reader-book', params: {
-          name,
-          books: JSON.stringify(books)
+          id,
+          name
         }});
     },
     updateReader(reader) {

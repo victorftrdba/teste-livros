@@ -70,17 +70,27 @@ import NavBar from "./NavBar.vue";
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "ReaderBooks",
   data() {
     return {
+      id: "",
       name: "",
       books: {},
     }
   },
-  created() {
+  async created() {
+    this.id = this.$route.params.id;
     this.name = this.$route.params.name;
-    this.books = JSON.parse(this.$route.params.books);
+
+    const response = await axios.get(`http://localhost:8000/api/readers/see-reader-books/${this.id}`, {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('admin-token')}`
+      }
+    });
+
+    this.books = response.data.books;
   }
 }
 </script>
