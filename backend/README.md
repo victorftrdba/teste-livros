@@ -38,3 +38,8 @@
     'email' => 'admin@teste.com'
     'password' => 'teste'
 ```
+- Credenciais de leitor:
+- ```sh
+    'email' => 'teste@teste.com'
+    'password' => 'teste'
+```
