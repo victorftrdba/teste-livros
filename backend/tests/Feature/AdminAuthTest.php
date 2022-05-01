@@ -19,9 +19,6 @@ class AdminAuthTest extends TestCase
             'password' => 'teste'
         ]);
 
-        $response_token = json_encode($response);
-        $response_token = json_decode($response_token);
-
-        $response->assertSee($response_token->baseResponse->original->plainTextToken);
+        $response->assertSee($response['plainTextToken']);
     }
 }

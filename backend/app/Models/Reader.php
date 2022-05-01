@@ -7,10 +7,11 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reader extends Eloquent implements Authenticatable
 {
-    use HasApiTokens, AuthenticatableTrait;
+    use HasApiTokens, AuthenticatableTrait, HasFactory;
 
     /**
      * @var string
