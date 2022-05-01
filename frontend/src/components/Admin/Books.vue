@@ -21,7 +21,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="book in books">
+          <tr v-for="(book, index) in books">
             <td>
               {{book.name}}
             </td>
@@ -56,8 +56,11 @@
               {{book.isbn}}
             </td>
             <td>
-              <button @click="updateBook(book)" class="btn-success ms-3">
+              <button @click="updateBook(book)" class="btn-success">
                 Editar livro
+              </button>
+              <button @click="deleteBook(index, book._id)" class="btn-danger ms-3">
+                Exclur livro
               </button>
             </td>
           </tr>
@@ -91,6 +94,15 @@ export default {
       this.$router.push({name: 'update-book', params: {
           book: JSON.stringify(book),
         }});
+    },
+    async deleteBook(index, id) {
+      this.books.splice(index,  1);
+
+      await axios.delete(`http://localhost:8000/api/books/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('admin-token')}`
+        }
+      });
     }
   }
 }

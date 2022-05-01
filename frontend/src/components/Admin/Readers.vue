@@ -19,7 +19,7 @@ import moment from 'moment'
           </tr>
           </thead>
           <tbody>
-          <tr v-for="reader in readers">
+          <tr v-for="(reader, index) in readers">
             <td>
               {{reader.name}}
             </td>
@@ -42,7 +42,7 @@ import moment from 'moment'
               <button @click="updateReader(reader)" class="btn-success ms-3">
                 Editar leitor
               </button>
-              <button @click="deleteReader(reader._id)" class="btn-danger ms-3">
+              <button @click="deleteReader(index, reader._id)" class="btn-danger ms-3">
                 Excluir leitor
               </button>
             </td>
@@ -84,6 +84,15 @@ export default {
       this.$router.push({name: 'update-reader', params: {
           reader: JSON.stringify(reader),
         }});
+    },
+    async deleteReader(index, id) {
+      this.readers.splice(index,  1);
+
+      await axios.delete(`http://localhost:8000/api/readers/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem('admin-token')}`
+        }
+      });
     }
   }
 }

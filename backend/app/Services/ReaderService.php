@@ -10,22 +10,36 @@ class ReaderService
 {
     public function authenticate($request)
     {
-        $reader = Reader::where('email', $request->get('email'))->first();
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|password'
+        ]);
 
-        if ($reader && Hash::check($request->get('password'), $reader->password)) {
+        $reader = Reader::where('email', $request->email)->first();
+
+        if ($reader && Hash::check($request->password, $reader->password)) {
             return $reader->createToken($reader->name);
         }
     }
 
     public function create($request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:mongodb.readers,email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'birthday' => 'required|date',
+            'password' => 'required|string'
+        ]);
+
         $data = [
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'phone' => $request->get('phone'),
-            'address' => $request->get('address'),
-            'birthday' => $request->get('birthday'),
-            'password' => Hash::make($request->get('password')),
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'birthday' => $request->birthday,
+            'password' => Hash::make($request->password),
         ];
 
         return Reader::create($data);
@@ -33,9 +47,27 @@ class ReaderService
 
     public function update($request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:mongodb.readers,email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'birthday' => 'required|date',
+            'password' => 'required|string'
+        ]);
+
         $reader = Reader::findOrFail($id);
 
-        return $reader->update($request->all());
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'birthday' => $request->birthday,
+            'password' => Hash::make($request->password),
+        ];
+
+        return $reader->update($data);
     }
 
     public function destroy($id)
@@ -47,8 +79,12 @@ class ReaderService
 
     public function storeReadBook($request, $id)
     {
+        $request->validate([
+            'book_id' => 'required|numeric',
+        ]);
+
         $reader = Reader::findOrFail($id);
-        $book = Book::findOrFail($request->get('book_id'))->toArray();
+        $book = Book::findOrFail($request->book_id)->toArray();
 
         return $reader->books()->create($book);
     }

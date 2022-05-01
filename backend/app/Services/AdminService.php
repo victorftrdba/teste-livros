@@ -9,9 +9,14 @@ class AdminService
 {
     public function authenticate($request)
     {
-        $user = User::where('email', $request->get('email'))->first();
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
-        if ($user && Hash::check($request->get('password'), $user->password)) {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
             return $user->createToken($user->name);
         }
     }
