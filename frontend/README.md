@@ -20,3 +20,6 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## Verificando testes
+- Utilizar comando <strong>npx cypress open</strong>
