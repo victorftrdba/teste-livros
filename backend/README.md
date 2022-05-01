@@ -12,6 +12,7 @@
 - Rode o comando <strong>composer install</strong>;
 - Utilizar porta 8000;
 - Gerar chave com <strong>php artisan key:generate</strong>;
+- Rodar o comando <strong>php artisan db:seed</strong> para gerar os logins necessários para primeiro acesso no painel administrativo e no painel de leitores;
 
 ## Informações importantes
 - Configurar no .env as credenciais do mailtrap para testar o envio de e-mails;
@@ -32,7 +33,6 @@
 
 ## Logando no Sistema
 - O front-end foi desenvolvido utilizando a biblioteca VueJS 3;
-- Para realizar o login no painel administrativo e conseguir gerar usuários leitores, é necessário rodar o comando <strong>php artisan db:seed --class=UserSeeder</strong>;
 - Credenciais do administrador:
 ```sh
     'email' => 'admin@teste.com'
