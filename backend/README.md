@@ -15,7 +15,7 @@
 
 ## Informações importantes
 - Configurar no .env as credenciais do mailtrap para testar o envio de e-mails;
-- <a href="https://mailtrap.io/signin">MAILTRAP</a>;
+- <a target="_blank" href="https://mailtrap.io/signin">MAILTRAP</a>;
 - Para verificar as CRONs configuradas, rode o comando <strong>php artisan schedule:list</strong>
 - O comando para testar o disparo de e-mails para os leitores em aniversário é: <strong>php artisan happy:birthday</strong>
 - Caso não tenha as configurações do banco de dados NoSQL MongoDB no arquivo /config/database.php, poderá utilizar as seguintes credenciais (inserir ou alterar na chave 'connections')':
@@ -29,4 +29,4 @@
   ],
 
 - Como estou utilizando Redis é necessário estar com o mesmo instalado, se estiver usando Windows verificar como instalar Redis no WSL e digite o comando <strong>sudo service redis-server start</strong>
-- Documentação: <a href="https://redis.io/docs/getting-started/installation/install-redis-on-windows/">Install Redis</a>
+- Documentação: <a target="_blank" href="https://redis.io/docs/getting-started/installation/install-redis-on-windows/">Install Redis</a>
